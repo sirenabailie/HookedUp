@@ -4,7 +4,7 @@ using HookedUp.Data;
 
 namespace HookedUp
 {
-    public class HookedUpDbContxt : DbContext
+    public class HookedUpDbContext : DbContext
     {
         public DbSet<User> Users { get; set; }
         public DbSet<ArtistProfile> ArtistProfiles { get; set; }
@@ -12,7 +12,7 @@ namespace HookedUp
         public DbSet<ReviewRating> ReviewRatings { get; set; }
         public DbSet<DirectMessage> DirectMessages { get; set; }
 
-        public HookedUpDbContxt(DbContextOptions<HookedUpDbContxt> context) : base(context)
+        public HookedUpDbContext(DbContextOptions<HookedUpDbContext> context) : base(context)
         {
         }
 
