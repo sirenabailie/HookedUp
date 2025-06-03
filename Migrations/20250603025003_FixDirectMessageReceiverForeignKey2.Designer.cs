@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HookedUp.Migrations
 {
     [DbContext(typeof(HookedUpDbContext))]
-    [Migration("20250603022343_FixDirectMessageReceiverForeignKey")]
-    partial class FixDirectMessageReceiverForeignKey
+    [Migration("20250603025003_FixDirectMessageReceiverForeignKey2")]
+    partial class FixDirectMessageReceiverForeignKey2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

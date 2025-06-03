@@ -13,7 +13,8 @@ namespace HookedUp.Data
                 Specialization = "Crochet",
                 ProfilePicture = "https://example.com/artist1.jpg",
                 ExpertiseLevel = "Advanced",
-                WorkImages = new[] { "https://example.com/work1.jpg", "https://example.com/work2.jpg" },
+                // Use List<string> for WorkImages instead of an array
+                WorkImages = new List<string> { "https://example.com/work1.jpg", "https://example.com/work2.jpg" },
                 WorkDescription = "Experienced in creating custom crochet items.",
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now

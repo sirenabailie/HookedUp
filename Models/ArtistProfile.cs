@@ -7,7 +7,7 @@ namespace HookedUp.Models
         public string Specialization { get; set; }
         public string ProfilePicture { get; set; }
         public string ExpertiseLevel { get; set; }
-        public string[] WorkImages { get; set; }  // Store image URLs
+        public List<string> WorkImages { get; set; }  // Use List<string> for flexibility
         public string WorkDescription { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }

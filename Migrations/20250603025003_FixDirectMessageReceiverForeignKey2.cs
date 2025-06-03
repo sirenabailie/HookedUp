@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace HookedUp.Migrations
 {
     /// <inheritdoc />
-    public partial class FixDirectMessageReceiverForeignKey : Migration
+    public partial class FixDirectMessageReceiverForeignKey2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
