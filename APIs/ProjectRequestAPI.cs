@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore;
 using HookedUp.Models;
 
-namespace YourProjectName.APIs
+namespace HookedUp.APIs
 {
     public class ProjectRequestAPI
     {
         public static void Map(WebApplication app)
         {
             // GET ALL ProjectRequests
-            app.MapGet("/projectrequests", (AppDbContext db) =>
+            app.MapGet("/projectrequests", (HookedUpDbContext db) =>
             {
                 var allProjectRequests = db.ProjectRequests
                     .Include(pr => pr.User) // Eager load the user related to the project request
@@ -24,7 +24,7 @@ namespace YourProjectName.APIs
             });
 
             // GET SINGLE ProjectRequest
-            app.MapGet("/projectrequests/{id}", (AppDbContext db, int id) =>
+            app.MapGet("/projectrequests/{id}", (HookedUpDbContext db, int id) =>
             {
                 var projectRequest = db.ProjectRequests
                     .Include(pr => pr.User)
@@ -39,7 +39,7 @@ namespace YourProjectName.APIs
             });
 
             // CREATE ProjectRequest
-            app.MapPost("/projectrequests", (AppDbContext db, ProjectRequest newRequest) =>
+            app.MapPost("/projectrequests", (HookedUpDbContext db, ProjectRequest newRequest) =>
             {
                 var projectRequest = new ProjectRequest
                 {
@@ -61,7 +61,7 @@ namespace YourProjectName.APIs
             });
 
             // UPDATE ProjectRequest
-            app.MapPut("/projectrequests/{id}", (AppDbContext db, ProjectRequest updatedRequest, int id) =>
+            app.MapPut("/projectrequests/{id}", (HookedUpDbContext db, ProjectRequest updatedRequest, int id) =>
             {
                 var projectRequest = db.ProjectRequests
                     .SingleOrDefault(pr => pr.Id == id);
@@ -86,7 +86,7 @@ namespace YourProjectName.APIs
             });
 
             // DELETE ProjectRequest
-            app.MapDelete("/projectrequests/{id}", (AppDbContext db, int id) =>
+            app.MapDelete("/projectrequests/{id}", (HookedUpDbContext db, int id) =>
             {
                 var projectRequest = db.ProjectRequests
                     .SingleOrDefault(pr => pr.Id == id);
