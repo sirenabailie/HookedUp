@@ -3,7 +3,7 @@ namespace HookedUp.Models
     public class ProjectRequest
     {
         public int Id { get; set; }
-        public int UserId { get; set; }  // Foreign key to User
+        public int UserId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string ProjectType { get; set; }
@@ -11,7 +11,8 @@ namespace HookedUp.Models
         public DateTime DueDate { get; set; }
         public string Status { get; set; }
         public bool Claimed { get; set; }
-        public int ClaimedByUserId { get; set; }  // Foreign key to User
+        public int? ClaimedByUserId { get; set; }
+
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
     }
