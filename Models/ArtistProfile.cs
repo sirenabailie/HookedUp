@@ -11,5 +11,8 @@ namespace HookedUp.Models
         public string WorkDescription { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
+
+        // Navigation property to the User model
+        public User User { get; set; }
     }
 }
