@@ -3,16 +3,15 @@ namespace HookedUp.Models
     public class ArtistProfile
     {
         public int Id { get; set; }
-        public int UserId { get; set; }  // Foreign key to User
+        public int UserId { get; set; }
         public string Specialization { get; set; }
         public string ProfilePicture { get; set; }
         public string ExpertiseLevel { get; set; }
-        public List<string> WorkImages { get; set; }  // Use List<string> for flexibility
+        public List<string> WorkImages { get; set; }
         public string WorkDescription { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime UpdatedAt { get; set; }
 
-        // Navigation property to the User model
         public User User { get; set; }
     }
 }

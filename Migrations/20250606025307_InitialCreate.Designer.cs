@@ -13,8 +13,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HookedUp.Migrations
 {
     [DbContext(typeof(HookedUpDbContext))]
-    [Migration("20250606020735_SeedData")]
-    partial class SeedData
+    [Migration("20250606025307_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -73,11 +73,11 @@ namespace HookedUp.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(4827),
+                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(6250),
                             ExpertiseLevel = "Advanced",
                             ProfilePicture = "https://example.com/artist1.jpg",
                             Specialization = "Crochet",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(4931),
+                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(6360),
                             UserId = 2,
                             WorkDescription = "Experienced in creating custom crochet items.",
                             WorkImages = new List<string> { "https://example.com/work1.jpg", "https://example.com/work2.jpg" }
@@ -126,7 +126,7 @@ namespace HookedUp.Migrations
                             ProjectRequestId = 1,
                             ReceiverId = 2,
                             SenderId = 1,
-                            Timestamp = new DateTime(2025, 6, 5, 21, 7, 35, 504, DateTimeKind.Local).AddTicks(239)
+                            Timestamp = new DateTime(2025, 6, 5, 21, 53, 7, 446, DateTimeKind.Local).AddTicks(1786)
                         });
                 });
 
@@ -185,14 +185,14 @@ namespace HookedUp.Migrations
                         {
                             Id = 1,
                             Claimed = false,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(7089),
+                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(8648),
                             Description = "Need a crocheted baby blanket.",
-                            DueDate = new DateTime(2025, 6, 10, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(6752),
+                            DueDate = new DateTime(2025, 6, 10, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(8296),
                             Location = "New York",
                             ProjectType = "Crochet",
                             Status = "Open",
                             Title = "Create a Baby Blanket",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(7164),
+                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(8724),
                             UserId = 1
                         });
                 });
@@ -240,12 +240,12 @@ namespace HookedUp.Migrations
                         {
                             Id = 1,
                             ArtistId = 2,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(8857),
+                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 446, DateTimeKind.Local).AddTicks(398),
                             ProjectRequestId = 1,
                             Rating = 5,
                             ReviewImage = new[] { "https://example.com/reviewimage1.jpg" },
                             ReviewText = "Amazing crochet work! Very satisfied.",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(8951),
+                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 446, DateTimeKind.Local).AddTicks(497),
                             UserId = 1
                         });
                 });
@@ -292,24 +292,24 @@ namespace HookedUp.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 501, DateTimeKind.Local).AddTicks(6825),
+                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 443, DateTimeKind.Local).AddTicks(8125),
                             Email = "sirenafoster@example.com",
                             Name = "Sirena Foster",
                             Password = "password123",
                             ProfilePicture = "https://example.com/sirenafoster.jpg",
                             Role = "user",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 502, DateTimeKind.Local).AddTicks(9782)
+                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(1035)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(436),
+                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(1204),
                             Email = "jane.smith@example.com",
                             Name = "Jane Smith",
                             Password = "password456",
                             ProfilePicture = "https://example.com/janesmith.jpg",
                             Role = "artist",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(441)
+                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(1208)
                         });
                 });
 

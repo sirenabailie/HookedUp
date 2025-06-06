@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -14,26 +15,6 @@ namespace HookedUp.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "ArtistProfiles",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    UserId = table.Column<int>(type: "integer", nullable: false),
-                    Specialization = table.Column<string>(type: "text", nullable: false),
-                    ProfilePicture = table.Column<string>(type: "text", nullable: false),
-                    ExpertiseLevel = table.Column<string>(type: "text", nullable: false),
-                    WorkImages = table.Column<string[]>(type: "text[]", nullable: false),
-                    WorkDescription = table.Column<string>(type: "text", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ArtistProfiles", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "ProjectRequests",
                 columns: table => new
@@ -97,6 +78,32 @@ namespace HookedUp.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ArtistProfiles",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    UserId = table.Column<int>(type: "integer", nullable: false),
+                    Specialization = table.Column<string>(type: "text", nullable: false),
+                    ProfilePicture = table.Column<string>(type: "text", nullable: false),
+                    ExpertiseLevel = table.Column<string>(type: "text", nullable: false),
+                    WorkImages = table.Column<List<string>>(type: "text[]", nullable: false),
+                    WorkDescription = table.Column<string>(type: "text", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ArtistProfiles", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ArtistProfiles_Users_UserId",
+                        column: x => x.UserId,
+                        principalTable: "Users",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "DirectMessages",
                 columns: table => new
                 {
@@ -112,15 +119,15 @@ namespace HookedUp.Migrations
                 {
                     table.PrimaryKey("PK_DirectMessages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_DirectMessages_ArtistProfiles_ReceiverId",
-                        column: x => x.ReceiverId,
-                        principalTable: "ArtistProfiles",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_DirectMessages_ProjectRequests_ProjectRequestId",
                         column: x => x.ProjectRequestId,
                         principalTable: "ProjectRequests",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_DirectMessages_Users_ReceiverId",
+                        column: x => x.ReceiverId,
+                        principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -132,33 +139,38 @@ namespace HookedUp.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ArtistProfiles",
-                columns: new[] { "Id", "CreatedAt", "ExpertiseLevel", "ProfilePicture", "Specialization", "UpdatedAt", "UserId", "WorkDescription", "WorkImages" },
-                values: new object[] { 1, new DateTime(2025, 6, 2, 21, 11, 53, 582, DateTimeKind.Local).AddTicks(7383), "Advanced", "https://example.com/artist1.jpg", "Crochet", new DateTime(2025, 6, 2, 21, 11, 53, 582, DateTimeKind.Local).AddTicks(7496), 2, "Experienced in creating custom crochet items.", new[] { "https://example.com/work1.jpg", "https://example.com/work2.jpg" } });
-
-            migrationBuilder.InsertData(
                 table: "ProjectRequests",
                 columns: new[] { "Id", "Claimed", "ClaimedByUserId", "CreatedAt", "Description", "DueDate", "Location", "ProjectType", "Status", "Title", "UpdatedAt", "UserId" },
-                values: new object[] { 1, false, null, new DateTime(2025, 6, 2, 21, 11, 53, 582, DateTimeKind.Local).AddTicks(9923), "Need a crocheted baby blanket.", new DateTime(2025, 6, 7, 21, 11, 53, 582, DateTimeKind.Local).AddTicks(9543), "New York", "Crochet", "Open", "Create a Baby Blanket", new DateTime(2025, 6, 2, 21, 11, 53, 583, DateTimeKind.Local).AddTicks(4), 1 });
+                values: new object[] { 1, false, null, new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(8648), "Need a crocheted baby blanket.", new DateTime(2025, 6, 10, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(8296), "New York", "Crochet", "Open", "Create a Baby Blanket", new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(8724), 1 });
 
             migrationBuilder.InsertData(
                 table: "ReviewRatings",
                 columns: new[] { "Id", "ArtistId", "CreatedAt", "ProjectRequestId", "Rating", "ReviewImage", "ReviewText", "UpdatedAt", "UserId" },
-                values: new object[] { 1, 2, new DateTime(2025, 6, 2, 21, 11, 53, 583, DateTimeKind.Local).AddTicks(1781), 1, 5, new[] { "https://example.com/reviewimage1.jpg" }, "Amazing crochet work! Very satisfied.", new DateTime(2025, 6, 2, 21, 11, 53, 583, DateTimeKind.Local).AddTicks(1876), 1 });
+                values: new object[] { 1, 2, new DateTime(2025, 6, 5, 21, 53, 7, 446, DateTimeKind.Local).AddTicks(398), 1, 5, new[] { "https://example.com/reviewimage1.jpg" }, "Amazing crochet work! Very satisfied.", new DateTime(2025, 6, 5, 21, 53, 7, 446, DateTimeKind.Local).AddTicks(497), 1 });
 
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "CreatedAt", "Email", "Name", "Password", "ProfilePicture", "Role", "UpdatedAt" },
                 values: new object[,]
                 {
-                    { 1, new DateTime(2025, 6, 2, 21, 11, 53, 580, DateTimeKind.Local).AddTicks(6255), "sirenafoster@example.com", "Sirena Foster", "password123", "https://example.com/sirenafoster.jpg", "user", new DateTime(2025, 6, 2, 21, 11, 53, 582, DateTimeKind.Local).AddTicks(1859) },
-                    { 2, new DateTime(2025, 6, 2, 21, 11, 53, 582, DateTimeKind.Local).AddTicks(2040), "jane.smith@example.com", "Jane Smith", "password456", "https://example.com/janesmith.jpg", "artist", new DateTime(2025, 6, 2, 21, 11, 53, 582, DateTimeKind.Local).AddTicks(2044) }
+                    { 1, new DateTime(2025, 6, 5, 21, 53, 7, 443, DateTimeKind.Local).AddTicks(8125), "sirenafoster@example.com", "Sirena Foster", "password123", "https://example.com/sirenafoster.jpg", "user", new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(1035) },
+                    { 2, new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(1204), "jane.smith@example.com", "Jane Smith", "password456", "https://example.com/janesmith.jpg", "artist", new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(1208) }
                 });
+
+            migrationBuilder.InsertData(
+                table: "ArtistProfiles",
+                columns: new[] { "Id", "CreatedAt", "ExpertiseLevel", "ProfilePicture", "Specialization", "UpdatedAt", "UserId", "WorkDescription", "WorkImages" },
+                values: new object[] { 1, new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(6250), "Advanced", "https://example.com/artist1.jpg", "Crochet", new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(6360), 2, "Experienced in creating custom crochet items.", new List<string> { "https://example.com/work1.jpg", "https://example.com/work2.jpg" } });
 
             migrationBuilder.InsertData(
                 table: "DirectMessages",
                 columns: new[] { "Id", "MessageText", "ProjectRequestId", "ReceiverId", "SenderId", "Timestamp" },
-                values: new object[] { 1, "Hi, I'd love to help with your baby blanket project!", 1, 2, 1, new DateTime(2025, 6, 2, 21, 11, 53, 583, DateTimeKind.Local).AddTicks(3318) });
+                values: new object[] { 1, "Hi, I'd love to help with your baby blanket project!", 1, 2, 1, new DateTime(2025, 6, 5, 21, 53, 7, 446, DateTimeKind.Local).AddTicks(1786) });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ArtistProfiles_UserId",
+                table: "ArtistProfiles",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_DirectMessages_ProjectRequestId",
@@ -180,13 +192,13 @@ namespace HookedUp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "ArtistProfiles");
+
+            migrationBuilder.DropTable(
                 name: "DirectMessages");
 
             migrationBuilder.DropTable(
                 name: "ReviewRatings");
-
-            migrationBuilder.DropTable(
-                name: "ArtistProfiles");
 
             migrationBuilder.DropTable(
                 name: "ProjectRequests");
