@@ -6,7 +6,7 @@ namespace HookedUp.APIs
     {
         public static void Map(WebApplication app)
         {
-            // GET All
+            // GET ALL
             app.MapGet("/projectrequests", (HookedUpDbContext db) =>
             {
                 var allRequests = db.ProjectRequests.ToList();
