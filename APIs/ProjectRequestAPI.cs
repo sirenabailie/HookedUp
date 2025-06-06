@@ -1,7 +1,3 @@
-// File: APIs/ProjectRequestAPI.cs
-
-using Microsoft.EntityFrameworkCore;
-using HookedUp;
 using HookedUp.Models;
 
 namespace HookedUp.APIs

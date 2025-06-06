@@ -49,5 +49,6 @@ app.UseCors();  // Enable CORS
 
 ProjectRequestAPI.Map(app);
 ArtistProfileAPI.Map(app);
+UserAPI.Map(app);
 
 app.Run();

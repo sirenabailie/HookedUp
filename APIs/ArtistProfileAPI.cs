@@ -1,5 +1,4 @@
 using Microsoft.EntityFrameworkCore;
-using HookedUp;
 using HookedUp.Models;
 
 namespace HookedUp.APIs
