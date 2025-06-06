@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using HookedUp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HookedUp.Migrations
 {
     [DbContext(typeof(HookedUpDbContext))]
-    partial class HookedUpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250603030212_FixForeignKeyReceiverId3")]
+    partial class FixForeignKeyReceiverId3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,20 +68,6 @@ namespace HookedUp.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("ArtistProfiles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(4827),
-                            ExpertiseLevel = "Advanced",
-                            ProfilePicture = "https://example.com/artist1.jpg",
-                            Specialization = "Crochet",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(4931),
-                            UserId = 2,
-                            WorkDescription = "Experienced in creating custom crochet items.",
-                            WorkImages = new List<string> { "https://example.com/work1.jpg", "https://example.com/work2.jpg" }
-                        });
                 });
 
             modelBuilder.Entity("HookedUp.Models.DirectMessage", b =>
@@ -114,17 +103,6 @@ namespace HookedUp.Migrations
                     b.HasIndex("SenderId");
 
                     b.ToTable("DirectMessages");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            MessageText = "Hi, I'd love to help with your baby blanket project!",
-                            ProjectRequestId = 1,
-                            ReceiverId = 2,
-                            SenderId = 1,
-                            Timestamp = new DateTime(2025, 6, 5, 21, 7, 35, 504, DateTimeKind.Local).AddTicks(239)
-                        });
                 });
 
             modelBuilder.Entity("HookedUp.Models.ProjectRequest", b =>
@@ -176,22 +154,6 @@ namespace HookedUp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ProjectRequests");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Claimed = false,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(7089),
-                            Description = "Need a crocheted baby blanket.",
-                            DueDate = new DateTime(2025, 6, 10, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(6752),
-                            Location = "New York",
-                            ProjectType = "Crochet",
-                            Status = "Open",
-                            Title = "Create a Baby Blanket",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(7164),
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("HookedUp.Models.ReviewRating", b =>
@@ -231,20 +193,6 @@ namespace HookedUp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ReviewRatings");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            ArtistId = 2,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(8857),
-                            ProjectRequestId = 1,
-                            Rating = 5,
-                            ReviewImage = new[] { "https://example.com/reviewimage1.jpg" },
-                            ReviewText = "Amazing crochet work! Very satisfied.",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(8951),
-                            UserId = 1
-                        });
                 });
 
             modelBuilder.Entity("HookedUp.Models.User", b =>
@@ -284,30 +232,6 @@ namespace HookedUp.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 501, DateTimeKind.Local).AddTicks(6825),
-                            Email = "sirenafoster@example.com",
-                            Name = "Sirena Foster",
-                            Password = "password123",
-                            ProfilePicture = "https://example.com/sirenafoster.jpg",
-                            Role = "user",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 502, DateTimeKind.Local).AddTicks(9782)
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(436),
-                            Email = "jane.smith@example.com",
-                            Name = "Jane Smith",
-                            Password = "password456",
-                            ProfilePicture = "https://example.com/janesmith.jpg",
-                            Role = "artist",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 7, 35, 503, DateTimeKind.Local).AddTicks(441)
-                        });
                 });
 
             modelBuilder.Entity("HookedUp.Models.ArtistProfile", b =>

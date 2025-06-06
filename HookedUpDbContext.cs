@@ -16,27 +16,33 @@ namespace HookedUp
         {
         }
 
-protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    modelBuilder.Entity<DirectMessage>()
-        .HasOne(dm => dm.Receiver)
-        .WithMany()
-        .HasForeignKey(dm => dm.ReceiverId)  // ReceiverId should point to UserId, not ArtistProfile
-        .OnDelete(DeleteBehavior.Cascade);
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // Relationships
+            modelBuilder.Entity<DirectMessage>()
+                .HasOne(dm => dm.Receiver)
+                .WithMany()
+                .HasForeignKey(dm => dm.ReceiverId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-    modelBuilder.Entity<DirectMessage>()
-        .HasOne(dm => dm.Sender)
-        .WithMany()
-        .HasForeignKey(dm => dm.SenderId)
-        .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<DirectMessage>()
+                .HasOne(dm => dm.Sender)
+                .WithMany()
+                .HasForeignKey(dm => dm.SenderId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-    modelBuilder.Entity<ArtistProfile>()
-        .HasOne(ap => ap.User)
-        .WithMany()
-        .HasForeignKey(ap => ap.UserId)
-        .OnDelete(DeleteBehavior.Cascade);
-}
+            modelBuilder.Entity<ArtistProfile>()
+                .HasOne(ap => ap.User)
+                .WithMany()
+                .HasForeignKey(ap => ap.UserId)
+                .OnDelete(DeleteBehavior.Cascade);
 
-
+            // ✅ Seeding data
+            modelBuilder.Entity<User>().HasData(UserData.Users);
+            modelBuilder.Entity<ArtistProfile>().HasData(ArtistProfileData.ArtistProfiles);
+            modelBuilder.Entity<ProjectRequest>().HasData(ProjectRequestData.ProjectRequests);
+            modelBuilder.Entity<ReviewRating>().HasData(ReviewRatingData.ReviewRatings);
+            modelBuilder.Entity<DirectMessage>().HasData(DirectMessageData.DirectMessages);
+        }
     }
 }
