@@ -48,5 +48,6 @@ app.UseHttpsRedirection();
 app.UseCors();  // Enable CORS
 
 ProjectRequestAPI.Map(app);
+ArtistProfileAPI.Map(app);
 
 app.Run();
