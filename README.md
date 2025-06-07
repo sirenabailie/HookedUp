@@ -120,7 +120,7 @@ Test coverage includes:
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 * **.NET 8.0** with Minimal APIs
 * **Entity Framework Core** (InMemory + SQLite/PostgreSQL)
@@ -129,7 +129,7 @@ Test coverage includes:
 
 ---
 
-## 🛡️ Future Improvements
+## Future Improvements
 
 * Authentication & role-based authorization
 * Pagination, filtering, and sorting
