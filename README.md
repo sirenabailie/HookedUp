@@ -167,6 +167,6 @@ https://github.com/users/sirenabailie/projects/5
 
 https://github.com/sirenafoster
 
-## 📄 License
+## License
 
 This project is licensed under the **MIT License**. Feel free to use and modify.
