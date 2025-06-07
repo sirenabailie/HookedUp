@@ -148,6 +148,25 @@ Test coverage includes:
 
 ---
 
+## Loom Video
+Coming Soon
+
+## ERD
+
+https://dbdiagram.io/d/Hooked-Up-682bd27a1227bdcb4e0c5c32
+
+## Postman Documentation
+
+https://documenter.getpostman.com/view/36778695/2sB2x2Luhp
+
+## Project Board
+
+https://github.com/users/sirenabailie/projects/5
+
+## Contributors
+
+https://github.com/sirenafoster
+
 ## 📄 License
 
 This project is licensed under the **MIT License**. Feel free to use and modify.
