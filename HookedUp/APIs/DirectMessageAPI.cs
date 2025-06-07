@@ -1,8 +1,7 @@
-// File: APIs/DirectMessageAPI.cs
-
 using Microsoft.EntityFrameworkCore;
 using HookedUp;
 using HookedUp.Models;
+using HookedUp.DTOs;
 
 namespace HookedUp.APIs
 {
@@ -13,71 +12,88 @@ namespace HookedUp.APIs
             // GET ALL
             app.MapGet("/directmessages", (HookedUpDbContext db) =>
             {
-                var allMessages = db.DirectMessages
-                    .Include(dm => dm.Sender)
-                    .Include(dm => dm.Receiver)
-                    .Include(dm => dm.ProjectRequest)
+                var dtos = db.DirectMessages
+                    .Select(dm => new DirectMessageDto
+                    {
+                        Id               = dm.Id,
+                        SenderId         = dm.SenderId,
+                        ReceiverId       = dm.ReceiverId,
+                        ProjectRequestId = dm.ProjectRequestId,
+                        MessageText      = dm.MessageText,
+                        Timestamp        = dm.Timestamp
+                    })
                     .ToList();
 
-                if (allMessages.Count == 0)
-                {
+                if (!dtos.Any())
                     return Results.Ok("There are no direct messages.");
-                }
 
-                return Results.Ok(allMessages);
+                return Results.Ok(dtos);
             });
 
-            // GET A SINGLE DIRECT MESSAGE BY ID
+            // GET SINGLE DIRECT MESSAGE BY ID
             app.MapGet("/directmessages/{messageId}", (HookedUpDbContext db, int messageId) =>
             {
-                var message = db.DirectMessages
-                    .Include(dm => dm.Sender)
-                    .Include(dm => dm.Receiver)
-                    .Include(dm => dm.ProjectRequest)
-                    .SingleOrDefault(dm => dm.Id == messageId);
+                var dto = db.DirectMessages
+                    .Where(dm => dm.Id == messageId)
+                    .Select(dm => new DirectMessageDto
+                    {
+                        Id               = dm.Id,
+                        SenderId         = dm.SenderId,
+                        ReceiverId       = dm.ReceiverId,
+                        ProjectRequestId = dm.ProjectRequestId,
+                        MessageText      = dm.MessageText,
+                        Timestamp        = dm.Timestamp
+                    })
+                    .SingleOrDefault();
 
-                if (message == null)
-                {
+                if (dto == null)
                     return Results.NotFound($"No DirectMessage found with Id = {messageId}");
-                }
 
-                return Results.Ok(message);
+                return Results.Ok(dto);
             });
 
             // GET DIRECT MESSAGES BY SENDER ID
             app.MapGet("/directmessages/sender/{senderId}", (HookedUpDbContext db, int senderId) =>
             {
-                var sentMessages = db.DirectMessages
+                var dtos = db.DirectMessages
                     .Where(dm => dm.SenderId == senderId)
-                    .Include(dm => dm.Sender)
-                    .Include(dm => dm.Receiver)
-                    .Include(dm => dm.ProjectRequest)
+                    .Select(dm => new DirectMessageDto
+                    {
+                        Id               = dm.Id,
+                        SenderId         = dm.SenderId,
+                        ReceiverId       = dm.ReceiverId,
+                        ProjectRequestId = dm.ProjectRequestId,
+                        MessageText      = dm.MessageText,
+                        Timestamp        = dm.Timestamp
+                    })
                     .ToList();
 
-                if (!sentMessages.Any())
-                {
+                if (!dtos.Any())
                     return Results.Ok($"User {senderId} has not sent any direct messages.");
-                }
 
-                return Results.Ok(sentMessages);
+                return Results.Ok(dtos);
             });
 
             // GET DIRECT MESSAGES BY RECEIVER ID
             app.MapGet("/directmessages/receiver/{receiverId}", (HookedUpDbContext db, int receiverId) =>
             {
-                var receivedMessages = db.DirectMessages
+                var dtos = db.DirectMessages
                     .Where(dm => dm.ReceiverId == receiverId)
-                    .Include(dm => dm.Sender)
-                    .Include(dm => dm.Receiver)
-                    .Include(dm => dm.ProjectRequest)
+                    .Select(dm => new DirectMessageDto
+                    {
+                        Id               = dm.Id,
+                        SenderId         = dm.SenderId,
+                        ReceiverId       = dm.ReceiverId,
+                        ProjectRequestId = dm.ProjectRequestId,
+                        MessageText      = dm.MessageText,
+                        Timestamp        = dm.Timestamp
+                    })
                     .ToList();
 
-                if (!receivedMessages.Any())
-                {
+                if (!dtos.Any())
                     return Results.Ok($"User {receiverId} has not received any direct messages.");
-                }
 
-                return Results.Ok(receivedMessages);
+                return Results.Ok(dtos);
             });
 
             // CREATE
@@ -105,13 +121,9 @@ namespace HookedUp.APIs
             // UPDATE
             app.MapPut("/directmessages/{messageId}", (HookedUpDbContext db, int messageId, DirectMessage updatedMessage) =>
             {
-                var existing = db.DirectMessages
-                    .SingleOrDefault(dm => dm.Id == messageId);
-
+                var existing = db.DirectMessages.SingleOrDefault(dm => dm.Id == messageId);
                 if (existing == null)
-                {
                     return Results.NotFound($"No DirectMessage found with Id = {messageId}");
-                }
 
                 existing.SenderId         = updatedMessage.SenderId;
                 existing.ReceiverId       = updatedMessage.ReceiverId;
@@ -121,7 +133,6 @@ namespace HookedUp.APIs
 
                 db.SaveChanges();
 
-                // Reload navigation properties:
                 db.Entry(existing).Reference(x => x.Sender).Load();
                 db.Entry(existing).Reference(x => x.Receiver).Load();
                 db.Entry(existing).Reference(x => x.ProjectRequest).Load();
@@ -129,16 +140,12 @@ namespace HookedUp.APIs
                 return Results.Ok(existing);
             });
 
-            // DELETE A DIRECT MESSAGE
+            // DELETE
             app.MapDelete("/directmessages/{messageId}", (HookedUpDbContext db, int messageId) =>
             {
-                var toDelete = db.DirectMessages
-                    .SingleOrDefault(dm => dm.Id == messageId);
-
+                var toDelete = db.DirectMessages.SingleOrDefault(dm => dm.Id == messageId);
                 if (toDelete == null)
-                {
                     return Results.NotFound($"No DirectMessage found with Id = {messageId}");
-                }
 
                 db.DirectMessages.Remove(toDelete);
                 db.SaveChanges();

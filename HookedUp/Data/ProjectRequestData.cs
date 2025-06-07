@@ -20,6 +20,21 @@ namespace HookedUp.Data
                 ClaimedByUserId = null,
                 CreatedAt = DateTime.Now,
                 UpdatedAt = DateTime.Now
+            },
+            new ProjectRequest
+            {
+                Id = 2,
+                UserId = 3,
+                Title = "Finish a Knit Scarf",
+                Description = "Looking for someone to finish my grandmother's knit scarf project.",
+                ProjectType = "Knit",
+                Location = "Chicago",
+                DueDate = DateTime.Now.AddDays(7),
+                Status = "Open",
+                Claimed = false,
+                ClaimedByUserId = null,
+                CreatedAt = DateTime.Now,
+                UpdatedAt = DateTime.Now
             }
         };
     }

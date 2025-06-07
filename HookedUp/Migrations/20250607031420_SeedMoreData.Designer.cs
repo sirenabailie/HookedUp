@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using HookedUp;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace HookedUp.Migrations
 {
     [DbContext(typeof(HookedUpDbContext))]
-    partial class HookedUpDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250607031420_SeedMoreData")]
+    partial class SeedMoreData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -70,14 +73,26 @@ namespace HookedUp.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(6250),
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(5306),
                             ExpertiseLevel = "Advanced",
                             ProfilePicture = "https://example.com/artist1.jpg",
                             Specialization = "Crochet",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(6360),
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(5415),
                             UserId = 2,
                             WorkDescription = "Experienced in creating custom crochet items.",
                             WorkImages = new List<string> { "https://example.com/work1.jpg", "https://example.com/work2.jpg" }
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(5509),
+                            ExpertiseLevel = "Intermediate",
+                            ProfilePicture = "https://example.com/sophiagarcia_art.jpg",
+                            Specialization = "Knit",
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(5511),
+                            UserId = 4,
+                            WorkDescription = "Experienced in creating custom knit items.",
+                            WorkImages = new List<string> { "https://example.com/sophia_work1.jpg", "https://example.com/sophia_work2.jpg" }
                         });
                 });
 
@@ -123,7 +138,16 @@ namespace HookedUp.Migrations
                             ProjectRequestId = 1,
                             ReceiverId = 2,
                             SenderId = 1,
-                            Timestamp = new DateTime(2025, 6, 5, 21, 53, 7, 446, DateTimeKind.Local).AddTicks(1786)
+                            Timestamp = new DateTime(2025, 6, 6, 22, 14, 20, 512, DateTimeKind.Local).AddTicks(1656)
+                        },
+                        new
+                        {
+                            Id = 2,
+                            MessageText = "Hello Sienna, I’d be happy to finish your knit scarf project!",
+                            ProjectRequestId = 2,
+                            ReceiverId = 3,
+                            SenderId = 4,
+                            Timestamp = new DateTime(2025, 6, 6, 22, 14, 20, 512, DateTimeKind.Local).AddTicks(1816)
                         });
                 });
 
@@ -182,15 +206,29 @@ namespace HookedUp.Migrations
                         {
                             Id = 1,
                             Claimed = false,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(8648),
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(8077),
                             Description = "Need a crocheted baby blanket.",
-                            DueDate = new DateTime(2025, 6, 10, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(8296),
+                            DueDate = new DateTime(2025, 6, 11, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(7727),
                             Location = "New York",
                             ProjectType = "Crochet",
                             Status = "Open",
                             Title = "Create a Baby Blanket",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(8724),
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(8183),
                             UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Claimed = false,
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(8268),
+                            Description = "Looking for someone to finish my grandmother's knit scarf project.",
+                            DueDate = new DateTime(2025, 6, 13, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(8265),
+                            Location = "Chicago",
+                            ProjectType = "Knit",
+                            Status = "Open",
+                            Title = "Finish a Knit Scarf",
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(8269),
+                            UserId = 3
                         });
                 });
 
@@ -237,13 +275,25 @@ namespace HookedUp.Migrations
                         {
                             Id = 1,
                             ArtistId = 2,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 446, DateTimeKind.Local).AddTicks(398),
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 512, DateTimeKind.Local).AddTicks(186),
                             ProjectRequestId = 1,
                             Rating = 5,
                             ReviewImage = new[] { "https://example.com/reviewimage1.jpg" },
                             ReviewText = "Amazing crochet work! Very satisfied.",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 446, DateTimeKind.Local).AddTicks(497),
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 512, DateTimeKind.Local).AddTicks(279),
                             UserId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ArtistId = 4,
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 512, DateTimeKind.Local).AddTicks(364),
+                            ProjectRequestId = 2,
+                            Rating = 4,
+                            ReviewImage = new[] { "https://example.com/reviewimage2.jpg" },
+                            ReviewText = "Sophia did a great job finishing my scarf—very happy with the result!",
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 512, DateTimeKind.Local).AddTicks(365),
+                            UserId = 3
                         });
                 });
 
@@ -289,24 +339,57 @@ namespace HookedUp.Migrations
                         new
                         {
                             Id = 1,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 443, DateTimeKind.Local).AddTicks(8125),
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 509, DateTimeKind.Local).AddTicks(6786),
                             Email = "sirenafoster@example.com",
                             Name = "Sirena Foster",
                             Password = "password123",
                             ProfilePicture = "https://example.com/sirenafoster.jpg",
                             Role = "user",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(1035)
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(348)
                         },
                         new
                         {
                             Id = 2,
-                            CreatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(1204),
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(517),
                             Email = "jane.smith@example.com",
                             Name = "Jane Smith",
                             Password = "password456",
                             ProfilePicture = "https://example.com/janesmith.jpg",
                             Role = "artist",
-                            UpdatedAt = new DateTime(2025, 6, 5, 21, 53, 7, 445, DateTimeKind.Local).AddTicks(1208)
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(521)
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(523),
+                            Email = "sienna.delmar@example.com",
+                            Name = "Sienna Delmar",
+                            Password = "password789",
+                            ProfilePicture = "https://example.com/siennadelmar.jpg",
+                            Role = "user",
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(525)
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(527),
+                            Email = "sophia.garcia@example.com",
+                            Name = "Sophia Garcia",
+                            Password = "password000",
+                            ProfilePicture = "https://example.com/sophiagarcia.jpg",
+                            Role = "artist",
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(528)
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CreatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(530),
+                            Email = "iris.huxley@example.com",
+                            Name = "Iris Huxley",
+                            Password = "password321",
+                            ProfilePicture = "https://example.com/irishuxley.jpg",
+                            Role = "artist",
+                            UpdatedAt = new DateTime(2025, 6, 6, 22, 14, 20, 511, DateTimeKind.Local).AddTicks(531)
                         });
                 });
 
