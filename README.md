@@ -150,9 +150,13 @@ Test coverage includes:
 
 ## Loom Video
 
-https://www.loom.com/share/88af0272f5a44005952e968c7d62e874
+[Testing all Requests in Postman](https://www.loom.com/share/88af0272f5a44005952e968c7d62e874)
 
-https://www.loom.com/share/c7769f2a408f4a238f335102a7d9c45e
+[My Three Artifacts](https://www.loom.com/share/c7769f2a408f4a238f335102a7d9c45e)
+
+## Postman Documentation
+
+[Published Documentation](https://documenter.getpostman.com/view/36778695/2sB2x2Luhp)
 
 ## ERD
 
