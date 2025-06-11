@@ -149,7 +149,10 @@ Test coverage includes:
 ---
 
 ## Loom Video
-https://www.loom.com/share/fa6ca2064672428bbea3a8040b5d5a1a
+
+https://www.loom.com/share/88af0272f5a44005952e968c7d62e874
+
+https://www.loom.com/share/c7769f2a408f4a238f335102a7d9c45e
 
 ## ERD
 
