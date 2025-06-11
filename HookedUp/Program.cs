@@ -1,5 +1,3 @@
-// File: HookedUp/Program.cs
-
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http.Json;
 using Microsoft.EntityFrameworkCore;
@@ -27,11 +25,11 @@ namespace HookedUp
                  .AllowAnyHeader()
             ));
 
-            // 3) Database: InMemory for Testing, else PostgreSQL
-            if (builder.Environment.IsEnvironment("Testing"))
+            // 3) Database: InMemory for Development & Testing, else PostgreSQL
+            if (builder.Environment.IsDevelopment() || builder.Environment.IsEnvironment("Testing"))
             {
                 builder.Services.AddDbContext<HookedUpDbContext>(o =>
-                    o.UseInMemoryDatabase("TestDb"));
+                    o.UseInMemoryDatabase("HookedUpInMemoryDb"));
             }
             else
             {
@@ -46,7 +44,16 @@ namespace HookedUp
 
             var app = builder.Build();
 
-            // 5) Middleware
+            // 5) Reset InMemory DB on each startup in Dev/Testing
+            if (app.Environment.IsDevelopment() || app.Environment.IsEnvironment("Testing"))
+            {
+                using var scope = app.Services.CreateScope();
+                var db = scope.ServiceProvider.GetRequiredService<HookedUpDbContext>();
+                db.Database.EnsureDeleted();
+                db.Database.EnsureCreated();
+            }
+
+            // 6) Middleware
             if (app.Environment.IsDevelopment())
             {
                 app.UseSwagger();
@@ -55,7 +62,7 @@ namespace HookedUp
             app.UseHttpsRedirection();
             app.UseCors();
 
-            // 6) Map your APIs
+            // 7) Map your APIs
             ProjectRequestAPI.Map(app);
             ArtistProfileAPI.Map(app);
             UserAPI.Map(app);
